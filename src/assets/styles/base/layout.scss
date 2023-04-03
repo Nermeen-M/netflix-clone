@@ -1,5 +1,5 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 html {
   font-family: "Roboto", sans-serif;
@@ -8,20 +8,10 @@ html {
   .container {
     padding: $space-medium;
   }
-
-  // main {
-  //   min-height: calc(100vh - 270px);
-  // }
 }
 
 @media (min-width: $media-tablet) {
 }
 
 @media (min-width: $media-desktop) {
-  // html {
-  //   .container {
-  //     max-width: 960px;
-  //     margin: 0 auto;
-  //   }
-  // }
 }

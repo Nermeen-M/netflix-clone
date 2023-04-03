@@ -3,8 +3,8 @@ $color-red: #e50914;
 $color-light-red: #eb3942;
 $color-orange: #e87c03;
 $color-gray: #8c8c8c;
-$color-dark-gray: #333333;
-$color-baby-blue: #c9e3ef;
+$color-gray-text: #737373;
+$color-dark-gray: #333;
 $color-white: #ffffff;
 
 /* Space */
@@ -14,11 +14,13 @@ $space-large: 24px;
 $space-x-large: 32px;
 
 /* Other */
-// $transition: 0.3s ease-in-out;
+$transition: 0.25s cubic-bezier(0.9, 0, 0.51, 1);
+$border-radius: 4px;
 // $box-shadow: 0 4px 10px rgb(0 0 0 / 25%);
 // $text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
 
 /* Media queries */
-// $media-big-phones: 550px;
+$media-big-phones: 440px;
+//700px header height changes
 $media-tablet: 740px;
 $media-desktop: 1280px;

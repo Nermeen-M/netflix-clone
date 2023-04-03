@@ -26,7 +26,7 @@ export default function SignUp() {
   }
 
   async function onSucess(result) {
-    const userData = { uid: result.payload, name: name, role: "student" };
+    const userData = { uid: result.payload, name: name, role: "subscriber" };
     await createDocumentWithManualId(collectionName, result.payload, userData);
     setIsLoading(false);
     navigate("/login");

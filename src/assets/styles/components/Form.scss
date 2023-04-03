@@ -1,0 +1,45 @@
+form {
+  display: flex;
+  flex-direction: column;
+
+  .form-field {
+    position: relative;
+    margin-bottom: $space-medium;
+
+    input {
+      height: 48px;
+      padding: 10px 10px 0;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+
+        & + label {
+          font-size: 11px;
+          top: 4px;
+          transform: translateY(0);
+        }
+      }
+
+      &.has-text {
+        & + label {
+          font-size: 11px;
+          top: 4px;
+        }
+      }
+
+      &.error {
+        border-color: #b92d2b;
+      }
+    }
+    label {
+      color: #8c8c8c;
+      font-size: 14px;
+      left: 10px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: font 0.1s ease, top 0.1s ease, transform 0.1s ease;
+    }
+  }
+}

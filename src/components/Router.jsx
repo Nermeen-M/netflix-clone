@@ -2,7 +2,7 @@ import React from "react";
 
 import UnloggedRoutes from "../routes/UnloggedRoutes";
 import AdminRoutes from "../routes/AdminRoutes";
-import SubscriberRoutes from "../routes/SubscriberRoutes";
+import CustomerRoutes from "../routes/CustomerRoutes";
 import { useUser } from "../state/UserContext";
 
 export default function Router() {
@@ -15,7 +15,7 @@ export default function Router() {
       {user.id && (
         <div className="main-content">
           {isAdmin && <AdminRoutes />}
-          {!isAdmin && <SubscriberRoutes />}
+          {!isAdmin && <CustomerRoutes />}
         </div>
       )}
     </>

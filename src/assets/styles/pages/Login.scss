@@ -1,0 +1,92 @@
+#login {
+  background: #000;
+  color: $color-white;
+  min-height: 100vh;
+
+  .login-form {
+    padding: 5%;
+    margin: 0 auto;
+
+    h1 {
+      margin-bottom: 28px;
+    }
+
+    .form-container {
+      //   display: flex;
+      //   flex-direction: column;
+      //   min-height: 550px;
+
+      form {
+        // flex-grow: 1;
+
+        input {
+          background: $color-dark-gray;
+          border-radius: $border-radius;
+          border: none;
+          color: $color-white;
+        }
+      }
+
+      .login-help {
+        display: flex;
+        justify-content: space-between;
+        color: #b3b3b3;
+        font-size: 13px;
+
+        a {
+          color: #b3b3b3;
+        }
+      }
+
+      .signup-now {
+        color: $color-gray-text;
+        font-size: 16px;
+        margin-top: $space-medium;
+
+        a {
+          color: $color-white;
+          margin-left: 4px;
+        }
+      }
+
+      .recaptcha {
+        p {
+          font-size: 13px;
+          margin-top: 12px;
+          color: $color-gray;
+
+          a {
+            color: #0071eb;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $media-tablet) {
+  #login {
+    background: url("../../images/login-background.jpg") no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 0;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: #000;
+      position: absolute;
+      opacity: 0.5;
+      z-index: -1;
+      display: block;
+    }
+
+    .login-form {
+      max-width: 450px;
+      background-color: rgba(0, 0, 0, 0.8);
+      min-height: 660px;
+    }
+  }
+}

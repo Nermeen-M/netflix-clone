@@ -1,0 +1,33 @@
+#basic-header {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  padding: 0 3%;
+
+  .logo {
+    img {
+      height: 25px;
+    }
+  }
+}
+
+#main-header {
+}
+
+@media (min-width: $media-big-phones) {
+  #basic-header {
+    height: 75px;
+
+    .logo {
+      img {
+        height: 55px;
+      }
+    }
+  }
+}
+
+@media (min-width: $media-tablet) {
+  #basic-header {
+    height: 90px;
+  }
+}
