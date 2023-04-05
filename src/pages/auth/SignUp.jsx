@@ -6,6 +6,7 @@ import { createDocumentWithManualId } from "../../scripts/firebase/fireStore";
 // import LoadingScreen from "../../components/shared/LoadingScreen";
 // import signUpImage from "../../assets/images/sign-up.png";
 // import logo from "../../assets/images/logo.png";
+import BasicHeader from "../../components/shared/BasicHeader";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function SignUp() {
   }
 
   async function onSucess(result) {
-    const userData = { uid: result.payload, name: name, role: "subscriber" };
+    const userData = { uid: result.payload, name: name, role: "customer" };
     await createDocumentWithManualId(collectionName, result.payload, userData);
     setIsLoading(false);
     navigate("/login");
@@ -38,53 +39,43 @@ export default function SignUp() {
   }
 
   return (
-    <div className="form auth-form">
-      {/* {isloading && <LoadingScreen />} */}
-      <div className="container">
-        {/* <Link to="/">
-          <img className="logo" src={logo} alt="Logo" />
-        </Link> */}
-
-        <h1>Welcome to Bright Brain! Let’s begin the adventure</h1>
-        {/* <img className="image" src={signUpImage} alt="Sign up" /> */}
-        <div className="form-container">
-          <form onSubmit={(event) => onSubmit(event)}>
-            <label>
-              Name
-              <input
-                placeholder="name"
-                type="name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Email
-              <input
-                placeholder="email"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Password
-              <input
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
-            </label>
-
-            <button className="primary-button">Create account</button>
-          </form>
-          <Link className="general-link" to="/login">
-            Login instead
-          </Link>
+    <div id="signup">
+      <BasicHeader pageName="signup" />
+      <div className="signup-form">
+        {/* {isloading && <LoadingScreen />} */}
+        <div className="container">
+          <h1>Joining Netflix is easy.</h1>
+          <p>
+            Enter your email and password, and you'll be watching in no time.
+          </p>
+          <div className="form-container">
+            <form onSubmit={(event) => onSubmit(event)}>
+              <div className="form-field">
+                <input
+                  placeholder="email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+                <label>Email </label>
+              </div>
+              <div className="form-field">
+                <input
+                  placeholder="password"
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                />
+                <label>Password</label>
+              </div>
+              <Link className="general-link" to="/recover-password">
+                Forgot your password?
+              </Link>
+              <button className="primary-button">Next</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

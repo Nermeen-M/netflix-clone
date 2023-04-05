@@ -19,11 +19,18 @@
       form {
         // flex-grow: 1;
 
-        input {
-          background: $color-dark-gray;
-          border-radius: $border-radius;
-          border: none;
-          color: $color-white;
+        .form-field {
+          input {
+            background: $color-dark-gray;
+            border-radius: $border-radius;
+            border: none;
+            color: $color-white;
+            padding: 16px 20px 0;
+          }
+
+          label {
+            left: 20px;
+          }
         }
       }
 

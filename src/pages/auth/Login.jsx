@@ -44,7 +44,7 @@ export default function Login() {
 
   return (
     <div id="login">
-      <BasicHeader className="dark" />
+      <BasicHeader pageName="login" />
       <div className="login-form">
         <h1>Sign In</h1>
         <div className="form-container">
