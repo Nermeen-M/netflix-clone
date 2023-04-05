@@ -15,6 +15,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const [message, setMessage] = useState(null);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -33,7 +34,7 @@ export default function Login() {
   }
 
   function onFailure(result) {
-    alert(`Cannot login, ${result.message}`);
+    setMessage(`Cannot login, ${result.message}`);
   }
 
   async function getUserData(userId) {
@@ -47,6 +48,7 @@ export default function Login() {
       <BasicHeader pageName="login" />
       <div className="login-form">
         <h1>Sign In</h1>
+        {message && <div className="message">{message}</div>}
         <div className="form-container">
           <form className="form" onSubmit={(event) => onSubmit(event)}>
             <div className="form-field">

@@ -4,14 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { createAccount } from "../../scripts/firebase/auth";
 import { createDocumentWithManualId } from "../../scripts/firebase/fireStore";
 // import LoadingScreen from "../../components/shared/LoadingScreen";
-// import signUpImage from "../../assets/images/sign-up.png";
-// import logo from "../../assets/images/logo.png";
 import BasicHeader from "../../components/shared/BasicHeader";
 
 export default function SignUp() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -27,7 +24,7 @@ export default function SignUp() {
   }
 
   async function onSucess(result) {
-    const userData = { uid: result.payload, name: name, role: "customer" };
+    const userData = { uid: result.payload, role: "customer" };
     await createDocumentWithManualId(collectionName, result.payload, userData);
     setIsLoading(false);
     navigate("/login");
