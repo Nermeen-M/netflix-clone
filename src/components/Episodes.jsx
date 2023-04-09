@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 import { readDocuments } from "../scripts/firebase/fireStore";
 import { useEpisodes } from "../state/EpisodesContext";
 import { useModal } from "../state/ModalContext";
+import SeasonSelect from "./SeasonSelect";
 
 export default function Episodes({ titleId }) {
   // const navigate = useNavigate();
   const { episodes, dispatch } = useEpisodes();
   const { setModal } = useModal();
 
-  // const [episodes, setEpisodes] = useState(null);
   const [status, setStatus] = useState("loading");
+  const [selectedOption, setSelectedOption] = useState(1);
+  const [seasonEpisodes, setSeasonEpisodes] = useState();
 
   const path = `titles/${titleId}/episodes`;
 
@@ -57,7 +59,11 @@ export default function Episodes({ titleId }) {
 
   return (
     <div>
-      <h2>Episodes</h2>
+      <div>
+        <h2>Episodes</h2>
+        <SeasonSelect episodes={episodes} />
+      </div>
+
       {episodesList.length !== 0 ? (
         <div className="episodes-list">{episodesList}</div>
       ) : (
