@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { readDocuments } from "../scripts/firebase/fireStore";
 import { useEpisodes } from "../state/EpisodesContext";
 import { useModal } from "../state/ModalContext";
-import SeasonSelect from "./SeasonSelect";
 
 export default function Episodes({ titleId }) {
+  // const navigate = useNavigate();
   const { episodes, dispatch } = useEpisodes();
   const { setModal } = useModal();
 
   const [status, setStatus] = useState("loading");
-  const [seasonEpisodes, setSeasonEpisodes] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState(1);
+  const [selectedOption, setSelectedOption] = useState(1);
+  const [seasonEpisodes, setSeasonEpisodes] = useState();
+  const [seasons, setSeasons] = useState([]);
 
   const path = `titles/${titleId}/episodes`;
 
@@ -20,12 +21,9 @@ export default function Episodes({ titleId }) {
     loadData(path);
   }, []);
 
-  // useEffect(() => {
-  //   const filteredEpisodes = episodes.filter((item) => item.season === 1);
-  //   console.log("filterd", filteredEpisodes);
-  //   setSeasonEpisodes(filteredEpisodes);
-  //   console.log("final", seasonEpisodes);
-  // }, []);
+  useEffect(() => {
+    getSeasons(episodes);
+  }, [episodes]);
 
   async function loadData(path) {
     const result = await readDocuments(path);
@@ -34,10 +32,7 @@ export default function Episodes({ titleId }) {
 
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
-    //refactor: add condition if null
-    //refactor: remove unnecessary await
-    const filteredEpisodes = await data.filter((item) => item.season === 1);
-    setSeasonEpisodes(filteredEpisodes);
+    // setEpisodes(data);
     setStatus("ready");
   }
 
@@ -46,7 +41,25 @@ export default function Episodes({ titleId }) {
     setStatus("error");
   }
 
-  const episodesList = seasonEpisodes.map((item) => (
+  function getSeasons(episodes) {
+    const seasons = episodes.map((item) => item.season);
+    const uniqueSeasons = seasons.filter(
+      (value, index, self) => self.indexOf(value) === index
+    );
+    setSeasons(uniqueSeasons);
+  }
+  const selectOptions = seasons.map((item) => (
+    <option key={item} value={item}>
+      {item}
+    </option>
+  ));
+  // function clickHandler(item) {
+  //   const url = `/watch/series/${titleId}/${item.season}/${item.id}`;
+  //   // setSelectedEpisode(item);
+  //   navigate(url);
+  // }
+
+  const episodesList = episodes.map((item) => (
     <Link
       key={item.id}
       to={`/watch/series/${titleId}/${item.season}/${item.id}`}
@@ -56,7 +69,7 @@ export default function Episodes({ titleId }) {
       <p>Season {item.season}</p>
     </Link>
   ));
-  console.log("seasonEpisodes", seasonEpisodes);
+
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>Error</p>;
 
@@ -64,10 +77,14 @@ export default function Episodes({ titleId }) {
     <div>
       <div>
         <h2>Episodes</h2>
-        <SeasonSelect
-          episodes={episodes}
-          setSeasonEpisodes={setSeasonEpisodes}
-        />
+        <label className="select">
+          <select
+            value={selectedOption}
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            {selectOptions}
+          </select>
+        </label>{" "}
       </div>
 
       {episodesList.length !== 0 ? (
