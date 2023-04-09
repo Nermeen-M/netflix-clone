@@ -15,7 +15,6 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
     );
     setSeasons(uniqueSeasons);
   }
-  console.log("selected season", selectedSeason);
 
   const selectOptions = seasons.map((item) => (
     <option key={item} value={item}>
@@ -26,9 +25,8 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
   function seasonChangeHandler(event) {
     setSelectedSeason(event.target.value);
     const filteredEpisodes = episodes.filter(
-      (item) => item.season === event.target.value
+      (item) => item.season == event.target.value
     );
-    console.log("filteredEpisodes", filteredEpisodes);
     setSeasonEpisodes(filteredEpisodes);
   }
 

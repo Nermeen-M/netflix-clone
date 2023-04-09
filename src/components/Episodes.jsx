@@ -5,6 +5,7 @@ import { readDocuments } from "../scripts/firebase/fireStore";
 import { useEpisodes } from "../state/EpisodesContext";
 import { useModal } from "../state/ModalContext";
 import SeasonSelect from "./SeasonSelect";
+import EpisodeItem from "./EpisodeItem";
 
 export default function Episodes({ titleId }) {
   const { episodes, dispatch } = useEpisodes();
@@ -12,7 +13,7 @@ export default function Episodes({ titleId }) {
 
   const [status, setStatus] = useState("loading");
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState(1);
+  // const [selectedSeason, setSelectedSeason] = useState(1);
 
   const path = `titles/${titleId}/episodes`;
 
@@ -35,8 +36,7 @@ export default function Episodes({ titleId }) {
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
     //refactor: add condition if null
-    //refactor: remove unnecessary await
-    const filteredEpisodes = await data.filter((item) => item.season === 1);
+    const filteredEpisodes = data.filter((item) => item.season === 1);
     setSeasonEpisodes(filteredEpisodes);
     setStatus("ready");
   }
@@ -47,16 +47,17 @@ export default function Episodes({ titleId }) {
   }
 
   const episodesList = seasonEpisodes.map((item) => (
-    <Link
-      key={item.id}
-      to={`/watch/series/${titleId}/${item.season}/${item.id}`}
-      onClick={() => setModal(null)}
-    >
-      <h3>{item.title}</h3>
-      <p>Season {item.season}</p>
-    </Link>
+    <EpisodeItem key={item.id} item={item} titleId={titleId} />
+    // <Link
+    //   key={item.id}
+    //   to={`/watch/series/${titleId}/${item.season}/${item.id}`}
+    //   onClick={() => setModal(null)}
+    // >
+    //   <h3>{item.title}</h3>
+    //   <p>Season {item.season}</p>
+    // </Link>
   ));
-  console.log("seasonEpisodes", seasonEpisodes);
+
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>Error</p>;
 
