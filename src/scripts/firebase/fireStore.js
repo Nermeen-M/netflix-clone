@@ -1,4 +1,11 @@
-import { doc, collection, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDoc,
+  setDoc,
+  collectionGroup,
+  query,
+} from "firebase/firestore";
 import { addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 
 import { database } from "./firebaseSetup";
@@ -94,6 +101,22 @@ export async function deleteDocument(path, id) {
     await deleteDoc(reference);
 
     result = { status: true, payload: null, message: `Document ${id} deleted` };
+  } catch (error) {
+    result.message = error.code;
+  }
+
+  return result;
+}
+
+export async function readCollectionGroup(path) {
+  let result = { status: false, payload: null, message: "" };
+
+  try {
+    const reference = collectionGroup(database, path);
+    const snap = await getDocs(reference);
+    const data = snap.docs.map((item) => ({ id: item.id, ...item.data() }));
+
+    result = { status: true, payload: data, message: "Documents read" };
   } catch (error) {
     result.message = error.code;
   }
