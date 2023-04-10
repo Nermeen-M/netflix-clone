@@ -5,6 +5,10 @@ import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useItems } from "../../state/ItemsContext";
 import MediaListing from "../../components/admin/MediaListing";
 import EmptyState from "../../components/admin/EmptyState";
+import data from "../../data/titleData.json";
+import fields from "../../data/titleFields.json";
+
+import AddItemForm from "../../components/form/AddItemForm";
 
 export default function AdminHome() {
   const { setModal } = useModal();
@@ -46,27 +50,25 @@ export default function AdminHome() {
 
   return (
     <div>
-      <button>Add new title</button>
+      <button
+        onClick={() =>
+          setModal(<AddItemForm path={path} fields={fields} data={data} />)
+        }
+      >
+        Add new title
+      </button>
       <div className="media">
-        {movies.length !== 0 && (
-          <div>
-            <h2>Movies</h2>
-            <MediaListing items={movies} />
-          </div>
-        )}
+        <h2>Movies</h2>
+        {movies.length !== 0 ? <MediaListing items={movies} /> : <EmptyState />}
 
-        {series.length !== 0 && (
-          <div>
-            <h2>Series</h2>
-            <MediaListing items={series} />
-          </div>
-        )}
+        <h2>Series</h2>
+        {series.length !== 0 ? <MediaListing items={series} /> : <EmptyState />}
 
-        {documentaries.length !== 0 && (
-          <div>
-            <h2>Documentaries</h2>
-            <MediaListing items={documentaries} />
-          </div>
+        <h2>Documentaries</h2>
+        {documentaries.length !== 0 ? (
+          <MediaListing items={documentaries} />
+        ) : (
+          <EmptyState />
         )}
       </div>
     </div>

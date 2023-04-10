@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "key": "title",
+    "type": "text",
+    "label": "Title",
+    "required": true,
+    "disabled": false,
+    "placeholder": "Title"
+  },
+  {
+    "id": 2,
+    "key": "description",
+    "type": "textarea",
+    "label": "Description",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 3,
+    "key": "thumbnail",
+    "type": "file",
+    "label": "Thumbnail",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 4,
+    "key": "season",
+    "type": "number",
+    "label": "Season",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 5,
+    "key": "number",
+    "type": "number",
+    "label": "Number",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 6,
+    "key": "url",
+    "type": "url",
+    "label": "URL",
+    "required": true,
+    "disabled": false
+  }
+]

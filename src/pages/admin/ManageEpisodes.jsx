@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useEpisodes } from "../../state/EpisodesContext";
 import SeasonSelect from "../../components/SeasonSelect";
+import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
 
 export default function ManageEpisodes() {
   const { titleId } = useParams();
@@ -36,12 +37,7 @@ export default function ManageEpisodes() {
   }
 
   const episodesList = seasonEpisodes.map((item) => (
-    <div key={item.id} item={item}>
-      <img src={item.thumbnail} width="150" />
-      <h3>{item.title}</h3>
-      <button>Edit</button>
-      <button>Delete</button>
-    </div>
+    <AdminEpisodeItem key={item.id} item={item} />
   ));
 
   if (status === "loading") return <p>Loading...</p>;

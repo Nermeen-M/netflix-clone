@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "key": "name",
+    "type": "text",
+    "label": "Name",
+    "required": true,
+    "disabled": false,
+    "placeholder": "Name"
+  },
+  {
+    "id": 2,
+    "key": "description",
+    "type": "textarea",
+    "label": "Description",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 3,
+    "key": "thumbnail",
+    "type": "file",
+    "label": "Thumbnail",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 4,
+    "key": "background",
+    "type": "file",
+    "label": "Background",
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 5,
+    "key": "type",
+    "type": "select",
+    "label": "Type",
+    "options": ["Movie", "Series", "Documentary"],
+    "required": true,
+    "disabled": false
+  },
+  {
+    "id": 6,
+    "key": "url",
+    "type": "url",
+    "label": "URL",
+    "required": true,
+    "disabled": false
+  }
+]
