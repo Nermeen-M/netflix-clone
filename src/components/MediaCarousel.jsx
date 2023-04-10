@@ -6,7 +6,7 @@ export default function MediaCarousel({ items }) {
 
   const carousel = items.map((item) => (
     <div key={item.id} onClick={() => setModal(<TitlePreview item={item} />)}>
-      <img src={item.thumbnail}></img>
+      <img src={item.thumbnail} />
     </div>
   ));
 
