@@ -11,19 +11,19 @@ export default function AddItemForm({ path, fields, data }) {
   const { dispatch } = useItems();
 
   const [form, setForm] = useState(data);
-  // const [formFields, setFormFields] = useState(fields);
+  const [formFields, setFormFields] = useState(fields);
   const manualId = uuidv4() + "_" + Date.now();
 
-  // useEffect(() => {
-  //   if (path == "titles") {
-  //     if (form.type == "series") {
-  //       const urlIndex = formFields.findIndex((item) => item.key === "url");
-  //       // const newFields = formFields.splice([urlIndex], 1);
-  //       delete formFields[urlIndex];
-  //       // setFormFields(newFields);
-  //     }
-  //   }
-  // }, [form]);
+  useEffect(() => {
+    if (path == "titles") {
+      if (form.type == "series") {
+        const newFields = fields.filter((item) => item.key !== "url");
+        setFormFields(newFields);
+      } else {
+        setFormFields(fields);
+      }
+    }
+  }, [form]);
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -46,7 +46,11 @@ export default function AddItemForm({ path, fields, data }) {
     <div className="form">
       <h1>Add item</h1>
       <form onSubmit={(event) => submitHandler(event)}>
-        <FieldsGenerator fields={fields} state={[form, setForm]} path={path} />
+        <FieldsGenerator
+          fields={formFields}
+          state={[form, setForm]}
+          path={path}
+        />
         <div className="buttons-group">
           <button className="primary-button">Add</button>
           <button className="primary-button" onClick={() => setModal(null)}>
