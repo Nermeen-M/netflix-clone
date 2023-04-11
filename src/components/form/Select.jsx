@@ -1,28 +1,29 @@
-import { useEffect } from "react";
-
 export default function Select({ item, state }) {
   const [form, setForm] = state;
 
-  useEffect(() => {
-    setForm({ ...form, [item.key]: item.options[0].toLowerCase() });
-  }, []);
-
   function ChangeHandler(event) {
-    setForm({ ...form, [item.key]: event.target.value.toLowerCase() });
-    // console.log("selected", event.target.value.toLowerCase());
+    setForm({ ...form, [item.key]: event.target.value });
   }
-  //   console.log("form", form);
 
-  const selectOptions = item.options.map((item) => (
-    <option key={item} value={item}>
-      {item}
+  const selectOptions = item.options.map((option) => (
+    <option key={option} value={option}>
+      {option}
     </option>
   ));
 
   return (
     <label className="select">
       {item.label}
-      <select onChange={ChangeHandler}>{selectOptions}</select>
+      <select
+        onChange={ChangeHandler}
+        value={form[item.key]}
+        required={item.required}
+      >
+        <option disabled={true} value="">
+          --Choose an option--
+        </option>
+        {selectOptions}
+      </select>
     </label>
   );
 }

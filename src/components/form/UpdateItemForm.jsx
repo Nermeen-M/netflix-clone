@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import FieldsGenerator from "../../components/form/FieldsGenerator";
 import { updateDocument } from "../../scripts/firebase/fireStore";
@@ -10,6 +10,18 @@ export default function UpdateItemForm({ path, fields, data }) {
   const { dispatch } = useItems();
 
   const [form, setForm] = useState(data);
+  const [formFields, setFormFields] = useState(fields);
+
+  useEffect(() => {
+    if (path == "titles") {
+      if (form.type == "series") {
+        const newFields = fields.filter((item) => item.key !== "url");
+        setFormFields(newFields);
+      } else {
+        setFormFields(fields);
+      }
+    }
+  }, [form]);
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -20,7 +32,7 @@ export default function UpdateItemForm({ path, fields, data }) {
   }
 
   function onSuccess() {
-    dispatch({ type: "update", payload: form });
+    dispatch({ type: "updateItem", payload: form });
     setModal(null);
   }
 
@@ -32,7 +44,7 @@ export default function UpdateItemForm({ path, fields, data }) {
     <div className="form">
       <h1>Edit item</h1>
       <form onSubmit={(event) => submitHandler(event)}>
-        <FieldsGenerator fields={fields} state={[form, setForm]} />
+        <FieldsGenerator fields={formFields} state={[form, setForm]} />
         <div className="buttons-group">
           <button className="primary-button">Save</button>
           <button className="primary-button" onClick={() => setModal(null)}>

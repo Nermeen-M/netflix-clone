@@ -37,7 +37,7 @@
     "key": "type",
     "type": "select",
     "label": "Type",
-    "options": ["Movie", "Series", "Documentary"],
+    "options": ["movie", "series", "documentary"],
     "required": true,
     "disabled": false
   },
