@@ -7,7 +7,6 @@ import MediaListing from "../../components/admin/MediaListing";
 import EmptyState from "../../components/admin/EmptyState";
 import data from "../../data/titleData.json";
 import fields from "../../data/titleFields.json";
-
 import AddItemForm from "../../components/form/AddItemForm";
 
 export default function AdminHome() {

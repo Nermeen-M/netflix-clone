@@ -2,21 +2,26 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useEpisodes } from "../../state/EpisodesContext";
+import { useModal } from "../../state/ModalContext";
+import data from "../../data/episodeData.json";
+import fields from "../../data/episodeFields.json";
 import SeasonSelect from "../../components/SeasonSelect";
 import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
+import AddItemForm from "../../components/form/AddItemForm";
 
 export default function ManageEpisodes() {
   const { titleId } = useParams();
+  const { setModal } = useModal();
   const { episodes, dispatch } = useEpisodes();
 
   const [status, setStatus] = useState("loading");
-  const [seasonEpisodes, setSeasonEpisodes] = useState([]);
+  //   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
 
   const path = `titles/${titleId}/episodes`;
 
   useEffect(() => {
     loadData(path);
-  }, []);
+  }, [episodes]);
 
   async function loadData(path) {
     const result = await readDocuments(path);
@@ -26,8 +31,8 @@ export default function ManageEpisodes() {
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
     //refactor: add condition if null
-    const filteredEpisodes = data.filter((item) => item.season === 1);
-    setSeasonEpisodes(filteredEpisodes);
+    // const filteredEpisodes = data.filter((item) => item.season === 1);
+    // setSeasonEpisodes(filteredEpisodes);
     setStatus("ready");
   }
 
@@ -36,8 +41,8 @@ export default function ManageEpisodes() {
     setStatus("error");
   }
 
-  const episodesList = seasonEpisodes.map((item) => (
-    <AdminEpisodeItem key={item.id} item={item} />
+  const episodesList = episodes.map((item) => (
+    <AdminEpisodeItem key={item.id} item={item} path={path} />
   ));
 
   if (status === "loading") return <p>Loading...</p>;
@@ -45,8 +50,14 @@ export default function ManageEpisodes() {
 
   return (
     <div>
-      <button>Add new episode</button>
-      <SeasonSelect episodes={episodes} setSeasonEpisodes={setSeasonEpisodes} />
+      <button
+        onClick={() =>
+          setModal(<AddItemForm path={path} fields={fields} data={data} />)
+        }
+      >
+        Add new episode
+      </button>
+      {/* <SeasonSelect episodes={episodes} setSeasonEpisodes={setSeasonEpisodes} /> */}
       {episodesList}
     </div>
   );

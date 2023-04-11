@@ -6,7 +6,7 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
 
   useEffect(() => {
     getSeasons(episodes);
-  }, []);
+  }, [episodes]);
 
   async function getSeasons(episodes) {
     const seasons = await episodes.map((item) => item.season);
