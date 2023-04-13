@@ -11,10 +11,11 @@ export default function Playback() {
 
   const [currentItem, setCurrentItem] = useState({});
 
-  //   const isSeries = {type === "series" ? true : false};
+  //   const isSeries = {type === "series" };
 
   const path = type === "series" ? `titles/${titleId}/episodes` : "titles";
 
+  // const id = type === "series" ? episodeId : titleId;
   const id = type === "series" ? episodeId : titleId;
 
   useEffect(() => {

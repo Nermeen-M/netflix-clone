@@ -5,6 +5,7 @@ import { useItems } from "../../state/ItemsContext";
 import MainHeader from "../../components/shared/MainHeader";
 import MediaCarousel from "../../components/MediaCarousel";
 import HeadingExpand from "../../components/shared/HeadingExpand";
+import Hero from "../../components/Hero";
 import TopTen from "../../components/TopTen";
 
 export default function Home() {
@@ -51,7 +52,7 @@ export default function Home() {
   return (
     <div id="home">
       <MainHeader searchValue={searchValue} setSearchValue={setSearchValue} />
-
+      {!searchValue && <Hero />}
       <div className="media">
         {movies.length !== 0 && (
           <>

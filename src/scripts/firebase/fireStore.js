@@ -4,6 +4,8 @@ import {
   getDoc,
   setDoc,
   collectionGroup,
+  query,
+  where,
 } from "firebase/firestore";
 import { addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 
@@ -38,6 +40,24 @@ export async function createDocumentWithManualId(collectionName, id, data) {
       payload: id,
       message: "Document created with manual ID",
     };
+  } catch (error) {
+    result.message = error.code;
+  }
+
+  return result;
+}
+
+export async function readDocumentsWithCondition(path, condition) {
+  let result = { status: false, payload: null, message: "" };
+
+  try {
+    const reference = collection(database, path);
+    const q = query(reference, where(condition));
+
+    const snap = await getDocs(q);
+    const data = snap.docs.map((item) => ({ id: item.id, ...item.data() }));
+
+    result = { status: true, payload: data, message: "Documents read" };
   } catch (error) {
     result.message = error.code;
   }

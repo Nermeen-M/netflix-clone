@@ -1,0 +1,44 @@
+.search {
+  display: flex;
+  position: relative;
+
+  .toggle-button {
+    svg {
+      width: 20px;
+      height: 20px;
+      color: $color-white;
+    }
+  }
+
+  .search-box {
+    height: 32px;
+    border: 1px solid $color-white;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 10px;
+    width: 270px;
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    transition: all 0.3s;
+
+    svg {
+      color: $color-white;
+      height: 20px;
+    }
+
+    .search-input {
+      background-color: transparent;
+      color: $color-white;
+      outline: 0;
+      border: 0;
+      font-size: 16px;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

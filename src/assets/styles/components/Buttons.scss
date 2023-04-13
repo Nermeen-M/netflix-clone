@@ -1,0 +1,47 @@
+.primary-button {
+  background-color: $color-red;
+  color: $color-white;
+  padding: 16px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: $transition;
+  margin: $space-large 0 12px;
+
+  &:hover {
+    background-color: #c11119;
+  }
+}
+
+.button {
+  border-radius: 4px;
+  padding: 5px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.secondary-button {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: $color-white;
+
+  &:hover {
+    background-color: rgba(109, 109, 110, 0.4);
+  }
+}
+
+.play-button {
+  background-color: $color-white;
+  color: $color-black;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+@media (min-width: $media-tablet) {
+  .button {
+    padding: 10px 25px;
+  }
+}
