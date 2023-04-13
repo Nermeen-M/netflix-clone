@@ -1,35 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useModal } from "../state/ModalContext";
+import { updateDocument } from "../scripts/firebase/fireStore";
 import Episodes from "./Episodes";
 
 export default function TitlePreview({ item }) {
   const { setModal } = useModal();
+  const navigate = useNavigate();
 
   const [selectedEpisode, setSelectedEpisode] = useState("");
   const isSeries = item.type === "series" ? true : false;
 
-  // const url = !isSeries
-  //   ? `/watch/${item.type}/${item.id}`
-  //   : `/watch/series/${item.id}/${selectedEpisode.season}/${selectedEpisode.id}`;
   const url = `/watch/${item.type}/${item.id}`;
-  // function playHandler() {
-  //   setModal(null);
-  // }
 
-  // console.log(selectedEpisode);
+  async function clickHandler() {
+    const updatedViews = item.views + 1;
+    const updatedTitle = { ...item, views: updatedViews };
+
+    await updateDocument("titles", item.id, updatedTitle);
+
+    setModal(null);
+    navigate(url);
+  }
+
   return (
     <div className="title-preview">
       <div className="image-continer">
         <img src={item.background} width="300" />
-        <div>
-          {!isSeries && (
-            <Link to={url} onClick={() => setModal(null)}>
-              Play
-            </Link>
-          )}
-        </div>
+        <div>{!isSeries && <button onClick={clickHandler}>Play</button>}</div>
       </div>
       <div className="details">
         <h1>{item.name}</h1>

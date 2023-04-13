@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import { useModal } from "../state/ModalContext";
 import TitlePreview from "./TitlePreview";
 
-export default function MediaCarousel({ items }) {
+export default function MediaCarousel({ items, isTopTen }) {
   const { setModal } = useModal();
 
   const settings = {
@@ -13,8 +13,8 @@ export default function MediaCarousel({ items }) {
     infinite: true,
     autoplay: false,
     dots: false,
-    centerMode: true,
-    centerPadding: "4%",
+    // centerMode: true,
+    // centerPadding: "4%",
     responsive: [
       {
         breakpoint: 1400,
@@ -47,12 +47,13 @@ export default function MediaCarousel({ items }) {
     ],
   };
 
-  const carousel = items.map((item) => (
+  const carousel = items.map((item, index) => (
     <div
       className="title"
       key={item.id}
       onClick={() => setModal(<TitlePreview item={item} />)}
     >
+      {isTopTen && <h2>{index + 1}</h2>}
       <img src={item.thumbnail} />
     </div>
   ));

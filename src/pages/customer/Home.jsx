@@ -5,6 +5,7 @@ import { useItems } from "../../state/ItemsContext";
 import MainHeader from "../../components/shared/MainHeader";
 import MediaCarousel from "../../components/MediaCarousel";
 import HeadingExpand from "../../components/shared/HeadingExpand";
+import TopTen from "../../components/TopTen";
 
 export default function Home() {
   const { items, dispatch } = useItems();
@@ -72,6 +73,8 @@ export default function Home() {
             <MediaCarousel items={documentaries} />
           </>
         )}
+
+        <TopTen />
       </div>
 
       {searchValue &&
