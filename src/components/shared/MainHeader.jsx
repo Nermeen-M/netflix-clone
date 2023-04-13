@@ -11,7 +11,7 @@ export default function MainHeader({ searchValue, setSearchValue }) {
   return (
     <header>
       <Link to="/" className="logo">
-        <img src={logo} alt="Netflix logo" />
+        <img src={logo} alt="Netflix logo" width="100" />
       </Link>
       <div className="search">
         <input

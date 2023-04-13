@@ -53,24 +53,24 @@ export default function Home() {
 
       <div className="media">
         {movies.length !== 0 && (
-          <div>
+          <>
             <HeadingExpand label="Movies" />
             <MediaCarousel items={movies} />
-          </div>
+          </>
         )}
 
         {series.length !== 0 && (
-          <div>
+          <>
             <HeadingExpand label="Series" />
             <MediaCarousel items={series} />
-          </div>
+          </>
         )}
 
         {documentaries.length !== 0 && (
-          <div>
+          <>
             <HeadingExpand label="Documentaries" />
             <MediaCarousel items={documentaries} />
-          </div>
+          </>
         )}
       </div>
 
