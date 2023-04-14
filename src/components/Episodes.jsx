@@ -9,7 +9,7 @@ export default function Episodes({ titleId, episodes, status }) {
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
 
   useEffect(() => {
-    const filteredEpisodes = episodes.filter((item) => item.season === 1);
+    const filteredEpisodes = episodes.filter((item) => item.season == 1);
     const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
     setSeasonEpisodes(sortedEpisodes);
   }, []);

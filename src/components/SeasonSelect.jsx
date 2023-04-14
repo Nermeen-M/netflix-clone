@@ -11,7 +11,7 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
   }, [episodes]);
 
   async function getSeasons(episodes) {
-    const seasons = await episodes.map((item) => item.season);
+    const seasons = await episodes.map((item) => Number(item.season));
     const uniqueSeasons = await seasons.filter(
       (value, index, self) => self.indexOf(value) === index
     );

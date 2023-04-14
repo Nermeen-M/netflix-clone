@@ -35,7 +35,7 @@ export default function ManageEpisodes() {
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
 
-    const filteredEpisodes = data.filter((item) => item.season === 1);
+    const filteredEpisodes = data.filter((item) => item.season == 1);
     const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
     setSeasonEpisodes(sortedEpisodes);
     setStatus("ready");
