@@ -79,7 +79,7 @@ form {
         width: 100%;
         height: 30px;
         border: 1px solid $color-red;
-        padding: $space-medium;
+        padding: 0 $space-medium;
 
         &.visually-hidden {
           position: absolute !important;
