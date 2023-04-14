@@ -45,9 +45,8 @@ export default function SignUp() {
           </p>
           <div className="form-container">
             <form onSubmit={(event) => onSubmit(event)}>
-              <div className="form-field">
+              <div className={email ? "form-field translated" : "form-field"}>
                 <input
-                  placeholder="email"
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -55,9 +54,10 @@ export default function SignUp() {
                 />
                 <label>Email </label>
               </div>
-              <div className="form-field">
+              <div
+                className={password ? "form-field translated" : "form-field"}
+              >
                 <input
-                  placeholder="password"
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}

@@ -49,9 +49,8 @@ export default function Login() {
         {message && <div className="message">{message}</div>}
         <div className="form-container">
           <form className="form" onSubmit={(event) => onSubmit(event)}>
-            <div className="form-field">
+            <div className={email ? "form-field translated" : "form-field"}>
               <input
-                // placeholder="email"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -59,9 +58,8 @@ export default function Login() {
               />
               <label>Email</label>
             </div>
-            <div className="form-field">
+            <div className={password ? "form-field translated" : "form-field"}>
               <input
-                // placeholder="password"
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}

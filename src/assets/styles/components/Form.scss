@@ -32,6 +32,7 @@ form {
         border-color: #b92d2b;
       }
     }
+
     label {
       color: #8c8c8c;
       font-size: 14px;
@@ -40,6 +41,16 @@ form {
       top: 50%;
       transform: translateY(-50%);
       transition: font 0.1s ease, top 0.1s ease, transform 0.1s ease;
+    }
+
+    &.translated {
+      input {
+        & + label {
+          font-size: 11px;
+          top: 4px;
+          transform: translateY(0);
+        }
+      }
     }
   }
 }
