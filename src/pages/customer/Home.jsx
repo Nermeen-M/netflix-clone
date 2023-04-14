@@ -10,6 +10,7 @@ import MediaHeading from "../../components/shared/MediaHeading";
 import Hero from "../../components/Hero";
 import TopTen from "../../components/TopTen";
 import SearchResults from "../../components/SearchResults";
+import LoadingScreen from "../../components/shared/LoadingScreen";
 
 export default function Home() {
   const { items, dispatch } = useItems();
@@ -51,7 +52,7 @@ export default function Home() {
   const documentaries = filterItemsByType("documentary");
   const heroTitle = getRandomItem(movies);
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <LoadingScreen />;
   if (status === "error") return <p>Error</p>;
 
   return (

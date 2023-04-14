@@ -8,6 +8,7 @@ import EmptyState from "../../components/admin/EmptyState";
 import data from "../../data/titleData.json";
 import fields from "../../data/titleFields.json";
 import AddItemForm from "../../components/form/AddItemForm";
+import LoadingScreen from "../../components/shared/LoadingScreen";
 
 export default function AdminHome() {
   const { setModal } = useModal();
@@ -44,7 +45,7 @@ export default function AdminHome() {
   const series = filterItemsByType("series");
   const documentaries = filterItemsByType("documentary");
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <LoadingScreen />;
   if (status === "error") return <p>Error</p>;
 
   return (

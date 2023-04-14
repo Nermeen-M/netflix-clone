@@ -42,3 +42,38 @@
     }
   }
 }
+
+.search-results {
+  display: flex;
+  height: 100px;
+  margin: 4%;
+  flex-wrap: wrap;
+  gap: 30px 2vw;
+
+  .no-results {
+    color: $color-white;
+  }
+
+  .title {
+    width: 200px;
+    height: 110px;
+  }
+}
+
+@media (min-width: $media-big-phones) {
+  .search-results {
+    height: 140px;
+  }
+}
+
+@media (min-width: $media-tablet) {
+  .search-results {
+    height: 120px;
+  }
+}
+
+@media (min-width: $media-desktop) {
+  .search-results {
+    height: 130px;
+  }
+}

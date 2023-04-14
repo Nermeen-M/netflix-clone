@@ -6,14 +6,16 @@
 
 /* Components */
 @import "./components/Modal.scss";
+@import "./components/Common.scss";
 @import "./components/Header.scss";
 @import "./components/Form.scss";
 @import "./pages/Login.scss";
 @import "./components/Carousel.scss";
-@import "./components/Search.scss";
 @import "./components/Hero.scss";
 @import "./components/Buttons.scss";
 @import "./pages/Home.scss";
 @import "./components/TitlePreview.scss";
 @import "./components/Episodes.scss";
 @import "./components/TitleCard.scss";
+@import "./pages/Playback.scss";
+@import "./components/Search.scss";

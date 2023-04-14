@@ -15,7 +15,9 @@ export default function SearchResults({ searchValue }) {
       {results.length !== 0 ? (
         list
       ) : (
-        <p>Your search for "{searchValue}" did not have any matches. </p>
+        <p class="no-results">
+          Your search for "{searchValue}" did not have any matches.{" "}
+        </p>
       )}
     </div>
   );

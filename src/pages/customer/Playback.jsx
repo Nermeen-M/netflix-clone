@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ReactPlayer from "react-player";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import { readDocument } from "../../scripts/firebase/fireStore";
+import LoadingScreen from "../../components/shared/LoadingScreen";
 
 export default function Playback() {
   const { type, titleId, seasonNumber, episodeId } = useParams();
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState("loading");
 
@@ -36,11 +40,14 @@ export default function Playback() {
     setStatus("error");
   }
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <LoadingScreen />;
   if (status === "error") return <p>Error</p>;
 
   return (
-    <div>
+    <div className="playback">
+      <button className="back-button" onClick={() => navigate(-1)}>
+        <FontAwesomeIcon icon={solid("arrow-left-long")} />
+      </button>
       <ReactPlayer
         url={currentItem.url}
         width="100%"

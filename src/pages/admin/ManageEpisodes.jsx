@@ -8,6 +8,7 @@ import fields from "../../data/episodeFields.json";
 import SeasonSelect from "../../components/SeasonSelect";
 import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
 import AddItemForm from "../../components/form/AddItemForm";
+import LoadingScreen from "../../components/shared/LoadingScreen";
 
 export default function ManageEpisodes() {
   const { titleId } = useParams();
@@ -45,7 +46,7 @@ export default function ManageEpisodes() {
     <AdminEpisodeItem key={item.id} item={item} path={path} />
   ));
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <LoadingScreen />;
   if (status === "error") return <p>Error</p>;
 
   return (

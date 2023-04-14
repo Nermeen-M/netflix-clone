@@ -1,0 +1,17 @@
+.playback {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    svg {
+      color: $color-white;
+      font-size: 40px;
+    }
+  }
+}
