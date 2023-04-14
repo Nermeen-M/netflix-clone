@@ -8,6 +8,7 @@ import { useEpisodes } from "../state/EpisodesContext";
 import { readDocuments } from "../scripts/firebase/fireStore";
 import { updateDocument } from "../scripts/firebase/fireStore";
 import Episodes from "./Episodes";
+import placeholder from "../assets/images/placeholder.jpg";
 
 export default function TitlePreview({ item }) {
   const { setModal } = useModal();
@@ -62,7 +63,10 @@ export default function TitlePreview({ item }) {
         <FontAwesomeIcon icon={solid("xmark")} />
       </button>
       <div className="image-container">
-        <img className="background" src={item.background} />
+        <img
+          className="background"
+          src={item.background ? item.background : placeholder}
+        />
         <div className="overlay">
           <div className="info">
             <h1>{item.name}</h1>

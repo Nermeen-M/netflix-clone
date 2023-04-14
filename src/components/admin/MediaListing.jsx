@@ -7,6 +7,7 @@ import UpdateItemForm from "../form/UpdateItemForm";
 import fields from "../../data/titleFields.json";
 import { useItems } from "../../state/ItemsContext";
 import { deleteDocument } from "../../scripts/firebase/fireStore";
+import placeholder from "../../assets/images/placeholder.jpg";
 
 export default function MediaListing({ items }) {
   const { setModal } = useModal();
@@ -25,7 +26,7 @@ export default function MediaListing({ items }) {
 
   const mediaList = items.map((item) => (
     <div className="media-item" key={item.id}>
-      <img src={item.thumbnail} />
+      <img src={item.thumbnail ? item.thumbnail : placeholder} />
       <h3>{item.name}</h3>
       <div className="buttons-group">
         <button
