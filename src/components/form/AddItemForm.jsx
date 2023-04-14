@@ -43,7 +43,7 @@ export default function AddItemForm({ path, fields, data }) {
   }
 
   return (
-    <div className="form">
+    <div className="admin-form">
       <h1>Add item</h1>
       <form onSubmit={(event) => submitHandler(event)}>
         <FieldsGenerator

@@ -9,6 +9,7 @@ import data from "../../data/titleData.json";
 import fields from "../../data/titleFields.json";
 import AddItemForm from "../../components/form/AddItemForm";
 import LoadingScreen from "../../components/shared/LoadingScreen";
+import AdminHeader from "../../components/admin/AdminHeader";
 
 export default function AdminHome() {
   const { setModal } = useModal();
@@ -49,28 +50,41 @@ export default function AdminHome() {
   if (status === "error") return <p>Error</p>;
 
   return (
-    <div>
-      <button
-        onClick={() =>
-          setModal(<AddItemForm path={path} fields={fields} data={data} />)
-        }
-      >
-        Add new title
-      </button>
-      <div className="media">
-        <h2>Movies</h2>
-        {movies.length !== 0 ? <MediaListing items={movies} /> : <EmptyState />}
+    <>
+      <AdminHeader />
 
-        <h2>Series</h2>
-        {series.length !== 0 ? <MediaListing items={series} /> : <EmptyState />}
+      <div className="admin-home">
+        <button
+          className="primary-button"
+          onClick={() =>
+            setModal(<AddItemForm path={path} fields={fields} data={data} />)
+          }
+        >
+          Add new title
+        </button>
+        <div className="admin-media">
+          <h2>Movies</h2>
+          {movies.length !== 0 ? (
+            <MediaListing items={movies} />
+          ) : (
+            <EmptyState />
+          )}
 
-        <h2>Documentaries</h2>
-        {documentaries.length !== 0 ? (
-          <MediaListing items={documentaries} />
-        ) : (
-          <EmptyState />
-        )}
+          <h2>Series</h2>
+          {series.length !== 0 ? (
+            <MediaListing items={series} />
+          ) : (
+            <EmptyState />
+          )}
+
+          <h2>Documentaries</h2>
+          {documentaries.length !== 0 ? (
+            <MediaListing items={documentaries} />
+          ) : (
+            <EmptyState />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

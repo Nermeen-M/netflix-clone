@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useEpisodes } from "../../state/EpisodesContext";
 import { useModal } from "../../state/ModalContext";
@@ -9,6 +10,8 @@ import SeasonSelect from "../../components/SeasonSelect";
 import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
 import AddItemForm from "../../components/form/AddItemForm";
 import LoadingScreen from "../../components/shared/LoadingScreen";
+import EmptyState from "../../components/admin/EmptyState";
+import AdminHeader from "../../components/admin/AdminHeader";
 
 export default function ManageEpisodes() {
   const { titleId } = useParams();
@@ -50,16 +53,24 @@ export default function ManageEpisodes() {
   if (status === "error") return <p>Error</p>;
 
   return (
-    <div>
-      <button
-        onClick={() =>
-          setModal(<AddItemForm path={path} fields={fields} data={data} />)
-        }
-      >
-        Add new episode
-      </button>
-      {/* <SeasonSelect episodes={episodes} setSeasonEpisodes={setSeasonEpisodes} /> */}
-      {episodesList}
-    </div>
+    <>
+      <AdminHeader />
+      <div className="manage-episodes">
+        <button
+          className="primary-button"
+          onClick={() =>
+            setModal(<AddItemForm path={path} fields={fields} data={data} />)
+          }
+        >
+          Add new episode
+        </button>
+
+        {episodesList.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <div className="episodes-list">{episodesList}</div>
+        )}
+      </div>
+    </>
   );
 }

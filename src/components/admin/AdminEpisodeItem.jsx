@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+
 import { useModal } from "../../state/ModalContext";
 import UpdateItemForm from "../form/UpdateItemForm";
 import fields from "../../data/episodeFields.json";
@@ -7,7 +10,7 @@ import { deleteDocument } from "../../scripts/firebase/fireStore";
 export default function AdminEpisodeItem({ item, path }) {
   const { setModal } = useModal();
   const { dispatch } = useEpisodes();
-  const { id, title, thumbnail } = item;
+  const { id, title, thumbnail, season, number } = item;
 
   async function deleteHandler(id) {
     const message = `Are you sure you want to delete ${title}`;
@@ -20,17 +23,23 @@ export default function AdminEpisodeItem({ item, path }) {
   }
 
   return (
-    <div>
+    <div className="admin-episode-item">
       <img src={thumbnail} width="150" />
       <h3>{title}</h3>
-      <button
-        onClick={() =>
-          setModal(<UpdateItemForm path={path} fields={fields} data={item} />)
-        }
-      >
-        Edit
-      </button>
-      <button onClick={() => deleteHandler(id)}>Delete</button>
+      <span>Season {season}</span>
+      <span>Episode {number}</span>
+      <div className="buttons-group">
+        <button
+          onClick={() =>
+            setModal(<UpdateItemForm path={path} fields={fields} data={item} />)
+          }
+        >
+          <FontAwesomeIcon icon={solid("pen-to-square")} />
+        </button>
+        <button onClick={() => deleteHandler(id)}>
+          <FontAwesomeIcon icon={solid("trash-can")} />
+        </button>
+      </div>
     </div>
   );
 }

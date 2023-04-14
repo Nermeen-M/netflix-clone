@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+
 import { useModal } from "../../state/ModalContext";
 import UpdateItemForm from "../form/UpdateItemForm";
 import fields from "../../data/titleFields.json";
@@ -21,22 +24,28 @@ export default function MediaListing({ items }) {
   }
 
   const mediaList = items.map((item) => (
-    <div key={item.id}>
-      <img src={item.thumbnail} width="150" />
+    <div className="media-item" key={item.id}>
+      <img src={item.thumbnail} />
       <h3>{item.name}</h3>
-      <button
-        onClick={() =>
-          setModal(<UpdateItemForm path={path} fields={fields} data={item} />)
-        }
-      >
-        Edit
-      </button>
-      <button onClick={() => deleteHandler(item.id, item.name)}>Delete</button>
-      {item.type === "series" && (
-        <Link to={`/${item.id}/episodes`}>View episodes</Link>
-      )}
+      <div className="buttons-group">
+        <button
+          onClick={() =>
+            setModal(<UpdateItemForm path={path} fields={fields} data={item} />)
+          }
+        >
+          <FontAwesomeIcon icon={solid("pen-to-square")} />
+        </button>
+        <button onClick={() => deleteHandler(item.id, item.name)}>
+          <FontAwesomeIcon icon={solid("trash-can")} />
+        </button>
+        {item.type === "series" && (
+          <Link to={`/${item.id}/episodes`}>
+            <FontAwesomeIcon icon={solid("arrow-right")} />
+          </Link>
+        )}
+      </div>
     </div>
   ));
 
-  return <div>{mediaList}</div>;
+  return <div className="media-list">{mediaList}</div>;
 }

@@ -41,7 +41,7 @@ export default function UpdateItemForm({ path, fields, data }) {
   }
 
   return (
-    <div className="form">
+    <div className="admin-form">
       <h1>Edit item</h1>
       <form onSubmit={(event) => submitHandler(event)}>
         <FieldsGenerator fields={formFields} state={[form, setForm]} />
