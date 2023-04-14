@@ -19,8 +19,6 @@ export default function ManageEpisodes() {
   const { episodes, dispatch } = useEpisodes();
 
   const [status, setStatus] = useState("loading");
-  //   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
-
   const path = `titles/${titleId}/episodes`;
 
   useEffect(() => {
@@ -34,9 +32,6 @@ export default function ManageEpisodes() {
 
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
-    //refactor: add condition if null
-    // const filteredEpisodes = data.filter((item) => item.season === 1);
-    // setSeasonEpisodes(filteredEpisodes);
     setStatus("ready");
   }
 

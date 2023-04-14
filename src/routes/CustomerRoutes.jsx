@@ -13,7 +13,6 @@ export default function CustomerRoutes() {
         path="/watch/:type/:titleId/:seasonNumber/:episodeId"
         element={<Playback />}
       />
-      {/* <Route path="/watch/:id" element={<Playback />} /> */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

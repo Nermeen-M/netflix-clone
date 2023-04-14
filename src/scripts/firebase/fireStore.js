@@ -4,8 +4,6 @@ import {
   getDoc,
   setDoc,
   collectionGroup,
-  query,
-  where,
 } from "firebase/firestore";
 import { addDoc, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 

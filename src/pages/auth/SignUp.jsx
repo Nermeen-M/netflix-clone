@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { createAccount } from "../../scripts/firebase/auth";
 import { createDocumentWithManualId } from "../../scripts/firebase/fireStore";
-// import LoadingScreen from "../../components/shared/LoadingScreen";
 import BasicHeader from "../../components/shared/BasicHeader";
 
 export default function SignUp() {
@@ -39,7 +38,6 @@ export default function SignUp() {
     <div id="signup">
       <BasicHeader pageName="signup" />
       <div className="signup-form">
-        {/* {isloading && <LoadingScreen />} */}
         <div className="container">
           <h1>Joining Netflix is easy.</h1>
           <p>

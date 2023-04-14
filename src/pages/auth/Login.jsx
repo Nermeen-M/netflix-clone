@@ -5,8 +5,6 @@ import { login } from "../../scripts/firebase/auth";
 import { readDocument } from "../../scripts/firebase/fireStore";
 import { useUser } from "../../state/UserContext";
 import BasicHeader from "../../components/shared/BasicHeader";
-// import loginImage from "../../assets/images/login.png";
-// import logo from "../../assets/images/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -88,20 +86,6 @@ export default function Login() {
           <div className="signup-now">
             New to Netflix?
             <Link to="/sign-up">Sign up now</Link>.
-          </div>
-          <div className="recaptcha">
-            <p>
-              This page is protected by Google reCAPTCHA to ensure you're not a
-              bot.
-              <a>Learn more.</a>
-            </p>
-            <p>
-              The information collected by Google reCAPTCHA is subject to the
-              Google Privacy Policy and Terms of Service, and is used for
-              providing, maintaining and improving the reCAPTCHA service and for
-              general security purposes (it is not used for personalised
-              advertising by Google).
-            </p>
           </div>
         </div>
       </div>

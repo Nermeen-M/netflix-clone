@@ -39,12 +39,7 @@ export default function Home() {
   }
 
   const filterItemsByType = (type) => {
-    return items.filter(
-      // (item) =>
-      //   item.type === type &&
-      //   item.name.toLowerCase().includes(searchValue.toLowerCase())
-      (item) => item.type === type
-    );
+    return items.filter((item) => item.type === type);
   };
 
   const movies = filterItemsByType("movie");

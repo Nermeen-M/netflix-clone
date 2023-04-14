@@ -6,8 +6,6 @@ export default function itemsReducer(state, action) {
       return onDeleteItem(state, action);
     case "initializeArray":
       return onInitializeArray(action);
-    // case "updateArray":
-    //   return onUpdateArray(state, action);
     case "updateItem":
       return onUpdateItem(state, action);
     default:
@@ -36,20 +34,6 @@ function onInitializeArray(action) {
 
   return newItems;
 }
-
-// function onUpdateArray(state, action) {
-//   console.log("action", action);
-//   const newItems = action.payload;
-//   const id = action.mediaId;
-//   const clonedItems = [...state];
-
-//   // console.log("media id", action.mediaId);
-//   const itemIndex = clonedItems.findIndex((item) => item.id === id);
-//   clonedItems[itemIndex] = { ...clonedItems[itemIndex], titles: newItems };
-//   // console.log(clonedItems[itemIndex]);
-//   // console.log("new state", clonedItems);
-//   return clonedItems;
-// }
 
 function onUpdateItem(state, action) {
   const updatedItem = action.payload;

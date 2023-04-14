@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createContext, useContext, useReducer } from "react";
 
 import itemsReducer from "./itemsReducer";
@@ -7,8 +6,6 @@ const Context = createContext(null);
 
 export function ItemsProvider({ children }) {
   const [items, dispatch] = useReducer(itemsReducer, []);
-
-  // const [categories, setCategories] = useState([]);
 
   const value = { items, dispatch };
 

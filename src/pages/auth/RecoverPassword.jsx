@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import { recoverAccount } from "../../scripts/firebase/auth";
-// import recoverPasswordImage from "../../assets/images/recover-password.png";
-// import logo from "../../assets/images/logo.png";
 import BasicHeader from "../../components/shared/BasicHeader";
 
 export default function RecoverPassword() {
