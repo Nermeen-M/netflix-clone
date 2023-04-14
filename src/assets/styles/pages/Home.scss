@@ -1,0 +1,31 @@
+.media-heading {
+  color: #e5e5e5;
+  font-size: 22px;
+  margin: 0 4% 10px;
+
+  a {
+    text-decoration: none;
+    transition: all 1s;
+    display: flex;
+    align-items: center;
+
+    span {
+      display: none;
+      color: #54b9c5;
+      font-size: 12px;
+      margin-left: 10px;
+
+      svg {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &:hover {
+    a {
+      span {
+        display: inline-flex;
+      }
+    }
+  }
+}

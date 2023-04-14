@@ -1,31 +1,14 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import { updateDocument } from "../scripts/firebase/fireStore";
-import { readDocumentsWithCondition } from "../scripts/firebase/fireStore";
 import { useModal } from "../state/ModalContext";
-import { useItems } from "../state/ItemsContext";
-import { getRandomItem } from "../scripts/helpers";
 import TitlePreview from "./TitlePreview";
 
-export default function Hero() {
+export default function Hero({ heroTitle }) {
   const { setModal } = useModal();
-  const { items } = useItems();
   const navigate = useNavigate();
-
-  const [status, setStatus] = useState("loading");
-
-  const [firstEpisode, setFirstEpisode] = useState();
-  // const [heroTitle, setHeroTitle] = useState();
-
-  //   useEffect(() => {
-  //     const item = getRandomItem(items);
-  //     setHeroTitle(item);
-  //   }, []);
-  const filteredItems = items.filter((item) => item.type === "movie");
-  const heroTitle = getRandomItem(filteredItems);
 
   const url = `/watch/${heroTitle.type}/${heroTitle.id}`;
 

@@ -6,27 +6,20 @@ import { useEpisodes } from "../state/EpisodesContext";
 import { useModal } from "../state/ModalContext";
 import SeasonSelect from "./SeasonSelect";
 import EpisodeItem from "./EpisodeItem";
+import { sortByEpisodeNumber } from "../scripts/helpers";
 
-export default function Episodes({ titleId }) {
+export default function Episodes({ titleId, setFirstEpisode }) {
   const { episodes, dispatch } = useEpisodes();
   const { setModal } = useModal();
 
   const [status, setStatus] = useState("loading");
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
-  // const [selectedSeason, setSelectedSeason] = useState(1);
 
   const path = `titles/${titleId}/episodes`;
 
   useEffect(() => {
     loadData(path);
   }, []);
-
-  // useEffect(() => {
-  //   const filteredEpisodes = episodes.filter((item) => item.season === 1);
-  //   console.log("filterd", filteredEpisodes);
-  //   setSeasonEpisodes(filteredEpisodes);
-  //   console.log("final", seasonEpisodes);
-  // }, []);
 
   async function loadData(path) {
     const result = await readDocuments(path);
@@ -46,25 +39,22 @@ export default function Episodes({ titleId }) {
     setStatus("error");
   }
 
-  const episodesList = seasonEpisodes.map((item) => (
+  const sortedEpisodes = sortByEpisodeNumber(seasonEpisodes);
+
+  // const firstEpisode = sortedEpisodes.splice(0, 1);
+  // setFirstEpisode(firstEpisode);
+
+  const episodesList = sortedEpisodes.map((item) => (
     <EpisodeItem key={item.id} item={item} titleId={titleId} />
-    // <Link
-    //   key={item.id}
-    //   to={`/watch/series/${titleId}/${item.season}/${item.id}`}
-    //   onClick={() => setModal(null)}
-    // >
-    //   <h3>{item.title}</h3>
-    //   <p>Season {item.season}</p>
-    // </Link>
   ));
 
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>Error</p>;
 
   return (
-    <div>
-      <div>
-        <h2>Episodes</h2>
+    <div className="episodes">
+      <div className="episodes-header">
+        <h3>Episodes</h3>
         <SeasonSelect
           episodes={episodes}
           setSeasonEpisodes={setSeasonEpisodes}

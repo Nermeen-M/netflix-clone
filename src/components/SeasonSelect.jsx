@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { sortNumbers } from "../scripts/helpers";
+
 export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(1);
@@ -16,9 +18,11 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
     setSeasons(uniqueSeasons);
   }
 
-  const selectOptions = seasons.map((item) => (
+  const sortedSeasons = sortNumbers(seasons);
+
+  const selectOptions = sortedSeasons.map((item) => (
     <option key={item} value={item}>
-      {item}
+      Season {item}
     </option>
   ));
 
@@ -31,7 +35,7 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
   }
 
   return (
-    <label className="select">
+    <label className="season-select">
       <select value={selectedSeason} onChange={seasonChangeHandler}>
         {selectOptions}
       </select>

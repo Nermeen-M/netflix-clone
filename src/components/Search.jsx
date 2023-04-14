@@ -13,7 +13,6 @@ export default function Search({ searchValue, setSearchValue }) {
         !searchBoxRef.current.contains(event.target)
       ) {
         setIsDisplayed(false);
-        setSearchValue("");
       }
     }
     document.addEventListener("mousedown", handleClickOutside);

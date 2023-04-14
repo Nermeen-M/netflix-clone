@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 import { useModal } from "../state/ModalContext";
 import TitlePreview from "./TitlePreview";
+import TitleCard from "./TitleCard";
 
 export default function MediaCarousel({ items, isTopTen }) {
   const { setModal } = useModal();
@@ -48,14 +49,7 @@ export default function MediaCarousel({ items, isTopTen }) {
   };
 
   const carousel = items.map((item, index) => (
-    <div
-      className="title"
-      key={item.id}
-      onClick={() => setModal(<TitlePreview item={item} />)}
-    >
-      {isTopTen && <h2>{index + 1}</h2>}
-      <img src={item.thumbnail} />
-    </div>
+    <TitleCard key={item.id} item={item} index={index} isTopTen={isTopTen} />
   ));
 
   return <Slider {...settings}>{carousel}</Slider>;

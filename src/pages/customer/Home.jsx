@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 
 import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useItems } from "../../state/ItemsContext";
+import { getRandomItem } from "../../scripts/helpers";
+
 import MainHeader from "../../components/shared/MainHeader";
 import MediaCarousel from "../../components/MediaCarousel";
-import HeadingExpand from "../../components/shared/HeadingExpand";
+import MediaHeading from "../../components/shared/MediaHeading";
 import Hero from "../../components/Hero";
 import TopTen from "../../components/TopTen";
+import SearchResults from "../../components/SearchResults";
 
 export default function Home() {
   const { items, dispatch } = useItems();
@@ -36,15 +39,17 @@ export default function Home() {
 
   const filterItemsByType = (type) => {
     return items.filter(
-      (item) =>
-        item.type === type &&
-        item.name.toLowerCase().includes(searchValue.toLowerCase())
+      // (item) =>
+      //   item.type === type &&
+      //   item.name.toLowerCase().includes(searchValue.toLowerCase())
+      (item) => item.type === type
     );
   };
 
   const movies = filterItemsByType("movie");
   const series = filterItemsByType("series");
   const documentaries = filterItemsByType("documentary");
+  const heroTitle = getRandomItem(movies);
 
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>Error</p>;
@@ -52,38 +57,34 @@ export default function Home() {
   return (
     <div id="home">
       <MainHeader searchValue={searchValue} setSearchValue={setSearchValue} />
-      {!searchValue && <Hero />}
-      <div className="media">
-        {movies.length !== 0 && (
-          <>
-            <HeadingExpand label="Movies" />
-            <MediaCarousel items={movies} />
-          </>
-        )}
+      {!searchValue ? (
+        <div className="media">
+          <Hero heroTitle={heroTitle} />
+          {movies.length !== 0 && (
+            <>
+              <MediaHeading label="Movies" />
+              <MediaCarousel items={movies} />
+            </>
+          )}
 
-        {series.length !== 0 && (
-          <>
-            <HeadingExpand label="Series" />
-            <MediaCarousel items={series} />
-          </>
-        )}
+          {series.length !== 0 && (
+            <>
+              <MediaHeading label="Series" />
+              <MediaCarousel items={series} />
+            </>
+          )}
 
-        {documentaries.length !== 0 && (
-          <>
-            <HeadingExpand label="Documentaries" />
-            <MediaCarousel items={documentaries} />
-          </>
-        )}
-
-        <TopTen />
-      </div>
-
-      {searchValue &&
-        movies.length == 0 &&
-        series.length == 0 &&
-        documentaries.length == 0 && (
-          <p>Your search for "{searchValue}" did not have any matches. </p>
-        )}
+          {documentaries.length !== 0 && (
+            <>
+              <MediaHeading label="Documentaries" />
+              <MediaCarousel items={documentaries} />
+            </>
+          )}
+          <TopTen />
+        </div>
+      ) : (
+        <SearchResults searchValue={searchValue} />
+      )}
     </div>
   );
 }
