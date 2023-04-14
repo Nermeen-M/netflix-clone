@@ -39,6 +39,11 @@
   &:hover {
     background-color: rgba(255, 255, 255, 0.75);
   }
+
+  &:disabled {
+    background-color: rgba(255, 255, 255, 0.75);
+    cursor: initial;
+  }
 }
 
 @media (min-width: $media-tablet) {

@@ -1,50 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
-import { readDocuments } from "../scripts/firebase/fireStore";
-import { useEpisodes } from "../state/EpisodesContext";
-import { useModal } from "../state/ModalContext";
 import SeasonSelect from "./SeasonSelect";
 import EpisodeItem from "./EpisodeItem";
 import { sortByEpisodeNumber } from "../scripts/helpers";
 
-export default function Episodes({ titleId, setFirstEpisode }) {
-  const { episodes, dispatch } = useEpisodes();
-  const { setModal } = useModal();
-
-  const [status, setStatus] = useState("loading");
+export default function Episodes({ titleId, episodes, status }) {
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
 
-  const path = `titles/${titleId}/episodes`;
-
   useEffect(() => {
-    loadData(path);
+    const filteredEpisodes = episodes.filter((item) => item.season === 1);
+    const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
+    setSeasonEpisodes(sortedEpisodes);
   }, []);
 
-  async function loadData(path) {
-    const result = await readDocuments(path);
-    result.status ? onSuccess(result.payload) : onFailure(result.message);
-  }
-
-  async function onSuccess(data) {
-    await dispatch({ type: "initializeArray", payload: data });
-    //refactor: add condition if null
-    const filteredEpisodes = data.filter((item) => item.season === 1);
-    setSeasonEpisodes(filteredEpisodes);
-    setStatus("ready");
-  }
-
-  function onFailure(errorMessage) {
-    alert(errorMessage);
-    setStatus("error");
-  }
-
-  const sortedEpisodes = sortByEpisodeNumber(seasonEpisodes);
-
-  // const firstEpisode = sortedEpisodes.splice(0, 1);
-  // setFirstEpisode(firstEpisode);
-
-  const episodesList = sortedEpisodes.map((item) => (
+  const episodesList = seasonEpisodes.map((item) => (
     <EpisodeItem key={item.id} item={item} titleId={titleId} />
   ));
 
@@ -61,11 +30,7 @@ export default function Episodes({ titleId, setFirstEpisode }) {
         />
       </div>
 
-      {episodesList.length !== 0 ? (
-        <div className="episodes-list">{episodesList}</div>
-      ) : (
-        <p>Content is coming soon.</p>
-      )}
+      <div className="episodes-list">{episodesList}</div>
     </div>
   );
 }

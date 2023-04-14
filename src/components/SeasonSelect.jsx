@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { sortNumbers } from "../scripts/helpers";
+import { sortNumbers, sortByEpisodeNumber } from "../scripts/helpers";
 
 export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
   const [seasons, setSeasons] = useState([]);
@@ -31,7 +31,8 @@ export default function SeasonSelect({ episodes, setSeasonEpisodes }) {
     const filteredEpisodes = episodes.filter(
       (item) => item.season == event.target.value
     );
-    setSeasonEpisodes(filteredEpisodes);
+    const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
+    setSeasonEpisodes(sortedEpisodes);
   }
 
   return (

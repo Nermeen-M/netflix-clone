@@ -1,21 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 import { useModal } from "../state/ModalContext";
+import { useEpisodes } from "../state/EpisodesContext";
+import { readDocuments } from "../scripts/firebase/fireStore";
 import { updateDocument } from "../scripts/firebase/fireStore";
 import Episodes from "./Episodes";
 
 export default function TitlePreview({ item }) {
   const { setModal } = useModal();
   const navigate = useNavigate();
+  const { episodes, dispatch } = useEpisodes();
 
-  const [firstEpisode, setFirstEpisode] = useState("");
+  const [status, setStatus] = useState("loading");
+  const [url, setUrl] = useState("");
+  const isSeries = item.type === "series";
+  const path = `titles/${item.id}/episodes`;
 
-  const isSeries = item.type === "series" ? true : false;
+  useEffect(() => {
+    setUrl(`/watch/${item.type}/${item.id}`);
+    {
+      isSeries && loadData(path);
+    }
+  }, []);
 
-  const url = `/watch/${item.type}/${item.id}`;
+  async function loadData(path) {
+    const result = await readDocuments(path);
+    result.status ? onSuccess(result.payload) : onFailure(result.message);
+  }
+
+  async function onSuccess(data) {
+    await dispatch({ type: "initializeArray", payload: data });
+
+    const firstEpisode = data.find(
+      (item) => item.season === 1 && item.number === 1
+    );
+    setUrl(`/watch/series/${item.id}/1/${firstEpisode.id}`);
+    setStatus("ready");
+  }
+
+  function onFailure(errorMessage) {
+    alert(errorMessage);
+    setStatus("error");
+  }
 
   async function clickHandler() {
     const updatedViews = item.views + 1;
@@ -37,7 +66,11 @@ export default function TitlePreview({ item }) {
         <div className="overlay">
           <div className="info">
             <h1>{item.name}</h1>
-            <button className="button play-button" onClick={clickHandler}>
+            <button
+              className="button play-button"
+              disabled={isSeries && episodes.length === 0 && true}
+              onClick={clickHandler}
+            >
               <FontAwesomeIcon icon={solid("play")} />
               Play
             </button>
@@ -50,8 +83,10 @@ export default function TitlePreview({ item }) {
           <p>{item.description}</p>
         </div>
 
-        {item.type === "series" && (
-          <Episodes titleId={item.id} setFirstEpisode={setFirstEpisode} />
+        {isSeries && episodes.length !== 0 ? (
+          <Episodes titleId={item.id} episodes={episodes} status={status} />
+        ) : (
+          isSeries && episodes.length === 0 && <p>Content is coming soon.</p>
         )}
       </div>
     </div>

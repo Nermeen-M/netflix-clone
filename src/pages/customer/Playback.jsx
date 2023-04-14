@@ -11,12 +11,11 @@ export default function Playback() {
 
   const [currentItem, setCurrentItem] = useState({});
 
-  //   const isSeries = {type === "series" };
+  const isSeries = type === "series";
 
-  const path = type === "series" ? `titles/${titleId}/episodes` : "titles";
+  const path = isSeries ? `titles/${titleId}/episodes` : "titles";
 
-  // const id = type === "series" ? episodeId : titleId;
-  const id = type === "series" ? episodeId : titleId;
+  const id = isSeries ? episodeId : titleId;
 
   useEffect(() => {
     loadData(path, id);
