@@ -1,5 +1,6 @@
 import { useItems } from "../state/ItemsContext";
 import MediaCarousel from "./MediaCarousel";
+import MediaHeading from "./shared/MediaHeading";
 
 export default function TopTen() {
   const { items } = useItems();
@@ -11,7 +12,7 @@ export default function TopTen() {
 
   return (
     <section className="top-ten">
-      <h2>Top 10 in Sweden</h2>
+      <h2 className="media-heading">Top 10 in Sweden</h2>
       <MediaCarousel items={topTen} isTopTen={isTopTen} />
     </section>
   );

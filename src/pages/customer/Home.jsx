@@ -58,30 +58,32 @@ export default function Home() {
     <div id="home">
       <MainHeader searchValue={searchValue} setSearchValue={setSearchValue} />
       {!searchValue ? (
-        <div className="media">
+        <>
           <Hero heroTitle={heroTitle} />
-          {movies.length !== 0 && (
-            <>
-              <MediaHeading label="Movies" />
-              <MediaCarousel items={movies} />
-            </>
-          )}
+          <div className="media">
+            {movies.length !== 0 && (
+              <>
+                <MediaHeading label="Movies" />
+                <MediaCarousel items={movies} />
+              </>
+            )}
 
-          {series.length !== 0 && (
-            <>
-              <MediaHeading label="Series" />
-              <MediaCarousel items={series} />
-            </>
-          )}
+            {series.length !== 0 && (
+              <>
+                <MediaHeading label="Series" />
+                <MediaCarousel items={series} />
+              </>
+            )}
 
-          {documentaries.length !== 0 && (
-            <>
-              <MediaHeading label="Documentaries" />
-              <MediaCarousel items={documentaries} />
-            </>
-          )}
+            {documentaries.length !== 0 && (
+              <>
+                <MediaHeading label="Documentaries" />
+                <MediaCarousel items={documentaries} />
+              </>
+            )}
+          </div>
           <TopTen />
-        </div>
+        </>
       ) : (
         <SearchResults searchValue={searchValue} />
       )}

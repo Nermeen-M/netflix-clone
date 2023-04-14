@@ -14,8 +14,10 @@ export default function MediaCarousel({ items, isTopTen }) {
     infinite: true,
     autoplay: false,
     dots: false,
+    // className: "center",
     // centerMode: true,
     // centerPadding: "4%",
+    // initialSlide: 1,
     responsive: [
       {
         breakpoint: 1400,

@@ -16,11 +16,16 @@
   border-radius: 4px;
   padding: 5px 14px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
   height: 30px;
+  font-weight: 500;
+
+  svg {
+    font-size: 15px;
+  }
 }
 
 .secondary-button {
@@ -49,5 +54,12 @@
 @media (min-width: $media-tablet) {
   .button {
     padding: 10px 25px;
+    height: 50px;
+    font-size: 20px;
+    gap: 5px;
+
+    svg {
+      font-size: 25px;
+    }
   }
 }

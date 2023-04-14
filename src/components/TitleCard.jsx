@@ -9,8 +9,13 @@ export default function TitleCard({ item, index, isTopTen }) {
       className="title"
       onClick={() => setModal(<TitlePreview item={item} />)}
     >
-      {isTopTen && <h2>{index + 1}</h2>}
-      <img src={item.thumbnail} />
+      {isTopTen && (
+        <img
+          className="rank"
+          src={require(`../assets/images/numbers/${index + 1}.png`)}
+        />
+      )}
+      <img className="thumbnail" src={item.thumbnail} />
     </div>
   );
 }

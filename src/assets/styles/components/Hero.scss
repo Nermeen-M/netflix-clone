@@ -46,5 +46,12 @@
 @media (min-width: $media-tablet) {
   #hero {
     margin-top: -70px;
+    height: 50vw;
+  }
+}
+
+@media (min-width: $media-desktop) {
+  #hero {
+    height: 100vh;
   }
 }
