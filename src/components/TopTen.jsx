@@ -1,6 +1,5 @@
 import { useItems } from "../state/ItemsContext";
 import MediaCarousel from "./MediaCarousel";
-import MediaHeading from "./shared/MediaHeading";
 
 export default function TopTen() {
   const { items } = useItems();

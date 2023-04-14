@@ -5,7 +5,12 @@ import { useModal } from "../../state/ModalContext";
 export default function Modal() {
   const { modal, setModal } = useModal();
 
-  const HTMLElement = document.getElementById("portal");
+  let HTMLElement = document.getElementById("portal");
+  if (!HTMLElement) {
+    HTMLElement = document.createElement("div");
+    HTMLElement.setAttribute("id", "HTMLElement");
+    document.body.appendChild(HTMLElement);
+  }
 
   if (modal === null) return null;
 
