@@ -62,7 +62,7 @@ export default function TitlePreview({ item }) {
         <FontAwesomeIcon icon={solid("xmark")} />
       </button>
       <div className="image-container">
-        <img className="background" src={item.background} width="300" />
+        <img className="background" src={item.background} />
         <div className="overlay">
           <div className="info">
             <h1>{item.name}</h1>

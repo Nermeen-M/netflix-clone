@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { readDocuments } from "../../scripts/firebase/fireStore";
 import { useEpisodes } from "../../state/EpisodesContext";
 import { useModal } from "../../state/ModalContext";
 import data from "../../data/episodeData.json";
 import fields from "../../data/episodeFields.json";
-import SeasonSelect from "../../components/SeasonSelect";
 import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
 import AddItemForm from "../../components/form/AddItemForm";
 import LoadingScreen from "../../components/shared/LoadingScreen";

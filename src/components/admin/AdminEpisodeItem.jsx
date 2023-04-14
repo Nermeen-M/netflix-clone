@@ -24,7 +24,7 @@ export default function AdminEpisodeItem({ item, path }) {
 
   return (
     <div className="admin-episode-item">
-      <img src={thumbnail} width="150" />
+      <img src={thumbnail} />
       <h3>{title}</h3>
       <span>Season {season}</span>
       <span>Episode {number}</span>

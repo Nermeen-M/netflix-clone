@@ -32,7 +32,7 @@ export default function MainHeader({ searchValue, setSearchValue }) {
       }
     >
       <Link to="/" className="logo">
-        <img src={logo} alt="Netflix logo" width="100" />
+        <img src={logo} alt="Netflix logo" />
       </Link>
       <div className="secondary-nav">
         <Search searchValue={searchValue} setSearchValue={setSearchValue} />

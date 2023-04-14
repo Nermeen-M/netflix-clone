@@ -29,7 +29,7 @@ export default function EpisodeItem({ item, titleId }) {
     <div className="episode-item" onClick={clickHandler}>
       <span className="number">{number}</span>
       <div className="image">
-        <img src={thumbnail} width="100" />
+        <img src={thumbnail} />
         <button className="play-episode">
           <FontAwesomeIcon icon={solid("play")} />
         </button>
