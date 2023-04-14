@@ -26,7 +26,6 @@ export default function AdminEpisodeItem({ item, path }) {
     <div className="admin-episode-item">
       <img src={thumbnail} />
       <h3>{title}</h3>
-      <span>Season {season}</span>
       <span>Episode {number}</span>
       <div className="buttons-group">
         <button
