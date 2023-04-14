@@ -22,7 +22,7 @@ export default function ManageEpisodes() {
 
   useEffect(() => {
     loadData(path);
-  }, [episodes]);
+  }, []);
 
   async function loadData(path) {
     const result = await readDocuments(path);
