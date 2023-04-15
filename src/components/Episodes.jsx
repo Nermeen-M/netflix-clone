@@ -12,7 +12,7 @@ export default function Episodes({ titleId, episodes, status }) {
     const filteredEpisodes = episodes.filter((item) => item.season == 1);
     const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
     setSeasonEpisodes(sortedEpisodes);
-  }, []);
+  }, [episodes]);
 
   const episodesList = seasonEpisodes.map((item) => (
     <EpisodeItem key={item.id} item={item} titleId={titleId} />

@@ -30,10 +30,16 @@
     flex-direction: column;
     justify-content: center;
     padding: 4%;
-    gap: 15px;
+    gap: 10px;
 
     h1 {
       text-transform: capitalize;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    p {
+      font-size: 12px;
     }
 
     .buttons {
@@ -47,6 +53,16 @@
   #hero {
     margin-top: -70px;
     height: 50vw;
+
+    .details {
+      gap: 15px;
+      h1 {
+        font-size: 32px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
   }
 }
 

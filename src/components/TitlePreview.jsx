@@ -22,9 +22,7 @@ export default function TitlePreview({ item }) {
 
   useEffect(() => {
     setUrl(`/watch/${item.type}/${item.id}`);
-    {
-      isSeries && loadData(path);
-    }
+    if (isSeries) loadData(path);
   }, []);
 
   async function loadData(path) {
@@ -36,7 +34,7 @@ export default function TitlePreview({ item }) {
     await dispatch({ type: "initializeArray", payload: data });
 
     const firstEpisode = data.find(
-      (item) => item.season === 1 && item.number === 1
+      (item) => item.season == 1 && item.number == 1
     );
     setUrl(`/watch/series/${item.id}/1/${firstEpisode.id}`);
     setStatus("ready");
