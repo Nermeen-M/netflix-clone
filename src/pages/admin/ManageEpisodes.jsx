@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { readDocuments } from "../../scripts/firebase/fireStore";
-import { useEpisodes } from "../../state/EpisodesContext";
 import { useModal } from "../../state/ModalContext";
+import { useItems } from "../../state/ItemsContext";
 import data from "../../data/episodeData.json";
 import fields from "../../data/episodeFields.json";
 import SeasonSelect from "../../components/SeasonSelect";
@@ -16,7 +16,7 @@ import { sortByEpisodeNumber } from "../../scripts/helpers";
 export default function ManageEpisodes() {
   const { titleId } = useParams();
   const { setModal } = useModal();
-  const { episodes, dispatch } = useEpisodes();
+  const { items, dispatch } = useItems();
 
   const [status, setStatus] = useState("loading");
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
@@ -25,7 +25,7 @@ export default function ManageEpisodes() {
 
   useEffect(() => {
     loadData(path);
-  }, []);
+  }, [items]);
 
   async function loadData(path) {
     const result = await readDocuments(path);
@@ -65,10 +65,7 @@ export default function ManageEpisodes() {
       </button>
 
       {episodesList.length !== 0 && (
-        <SeasonSelect
-          episodes={episodes}
-          setSeasonEpisodes={setSeasonEpisodes}
-        />
+        <SeasonSelect episodes={items} setSeasonEpisodes={setSeasonEpisodes} />
       )}
 
       {episodesList.length === 0 ? (
