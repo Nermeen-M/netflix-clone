@@ -6,12 +6,9 @@ import { useModal } from "../../state/ModalContext";
 import { useItems } from "../../state/ItemsContext";
 import data from "../../data/episodeData.json";
 import fields from "../../data/episodeFields.json";
-import SeasonSelect from "../../components/SeasonSelect";
-import AdminEpisodeItem from "../../components/admin/AdminEpisodeItem";
 import AddItemForm from "../../components/form/AddItemForm";
 import LoadingScreen from "../../components/shared/LoadingScreen";
-import EmptyState from "../../components/admin/EmptyState";
-import { sortByEpisodeNumber } from "../../scripts/helpers";
+import AdminEpisodesList from "../../components/admin/AdminEpisodesList";
 
 export default function ManageEpisodes() {
   const { titleId } = useParams();
@@ -19,8 +16,6 @@ export default function ManageEpisodes() {
   const { items, dispatch } = useItems();
 
   const [status, setStatus] = useState("loading");
-  const [seasonEpisodes, setSeasonEpisodes] = useState([]);
-
   const path = `titles/${titleId}/episodes`;
 
   useEffect(() => {
@@ -34,10 +29,6 @@ export default function ManageEpisodes() {
 
   async function onSuccess(data) {
     await dispatch({ type: "initializeArray", payload: data });
-
-    const filteredEpisodes = data.filter((item) => item.season == 1);
-    const sortedEpisodes = sortByEpisodeNumber(filteredEpisodes);
-    setSeasonEpisodes(sortedEpisodes);
     setStatus("ready");
   }
 
@@ -45,10 +36,6 @@ export default function ManageEpisodes() {
     alert(errorMessage);
     setStatus("error");
   }
-
-  const episodesList = seasonEpisodes.map((item) => (
-    <AdminEpisodeItem key={item.id} item={item} path={path} />
-  ));
 
   if (status === "loading") return <LoadingScreen />;
   if (status === "error") return <p>Error</p>;
@@ -64,15 +51,7 @@ export default function ManageEpisodes() {
         Add new episode
       </button>
 
-      {episodesList.length !== 0 && (
-        <SeasonSelect episodes={items} setSeasonEpisodes={setSeasonEpisodes} />
-      )}
-
-      {episodesList.length === 0 ? (
-        <EmptyState />
-      ) : (
-        <div className="episodes-list">{episodesList}</div>
-      )}
+      <AdminEpisodesList episodes={items} path={path} />
     </div>
   );
 }
