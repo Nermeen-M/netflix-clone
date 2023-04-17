@@ -9,15 +9,12 @@ export default function Router() {
   const { user } = useUser();
   const isAdmin = user.role == "admin";
 
+  // small refactor
   return (
     <>
       {!user.id && <UnloggedRoutes />}
-      {user.id && (
-        <div className="main-content">
-          {isAdmin && <AdminRoutes />}
-          {!isAdmin && <CustomerRoutes />}
-        </div>
-      )}
+      {user.id && isAdmin && <AdminRoutes />}
+      {user.id && !isAdmin && <CustomerRoutes />}
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
+// this part looks a bit messy, refactor it
 export default function Search({ searchValue, setSearchValue }) {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const searchBoxRef = useRef(null);

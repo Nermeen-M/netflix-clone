@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import TitleCard from "./TitleCard";
 
 export default function MediaCarousel({ items, isTopTen }) {
+  // 
   const settings = {
     slidesToShow: 6,
     slidesToScroll: 6,

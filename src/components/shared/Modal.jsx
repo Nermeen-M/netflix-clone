@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 
 import { useModal } from "../../state/ModalContext";
 
+// good
 export default function Modal() {
   const { modal, setModal } = useModal();
 
